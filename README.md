@@ -44,8 +44,8 @@ gazebo
 
 ## Useful links
 
-* [Gazebo laser sensor RRBot example](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Laser)
-* [Gazebo camera sensor RRBot example](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Camera)
+* [Gazebo laser sensor](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Laser)
+* [Gazebo camera sensor](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Camera)
 * [Lidar plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/RayPlugin.cc)
 * [Camera plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
 * [Wheel joint actuator plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
