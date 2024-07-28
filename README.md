@@ -38,3 +38,8 @@ Inside the Gazebo world one can identify:
 ```
 gazebo
 ```
+
+## Useful links
+
+* [Gazebo laser sensor RRBot example](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Laser)
+* [Gazebo camera sensor RRBot example](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Camera)
