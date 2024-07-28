@@ -4,14 +4,16 @@ The purpose of this repository is to design and build a mobile robot, and house 
 ## Description
 Inside the Gazebo world one can identify:
 
-* robot with caset and two wheels.
+* Two wheeled Robot with caster.
+* Sensors (lidar and camera) mounted on the robot.
 
 ## Getting Started
 
 ### Directory structure
     .GoChaseIt                         # Build Gazebo World Project 
     ├── urdf                           # Robot definition 
-    │   ├── my_robot.xacro
+    │   ├── my_robot.xacro             # Robot description
+    │   ├── my_robot.gazebo            # Plugin for sensor/actuator (Camera/Hokuyo lidar/Wheel joints)
     ├── launch                         # Launch nodes      
     │   ├── world.launch
     ├── meshes                         # Mesh file for Hokuyo lidar sensor      
@@ -43,3 +45,6 @@ gazebo
 
 * [Gazebo laser sensor RRBot example](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Laser)
 * [Gazebo camera sensor RRBot example](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Camera)
+* [Lidar plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/RayPlugin.cc)
+* [Camera plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
+* [Wheel joint actuator plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
