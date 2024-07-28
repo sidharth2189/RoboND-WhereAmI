@@ -49,4 +49,4 @@ gazebo
 * [Lidar plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/RayPlugin.cc)
 * [Camera plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
 * [Wheel joint actuator plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
-* [Mesh files for entire library of models](http://models.gazebosim.org/)
+* [Mesh files for entire library of models in Gazebo](http://models.gazebosim.org/)
