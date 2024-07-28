@@ -14,6 +14,8 @@ Inside the Gazebo world one can identify:
     │   ├── my_robot.xacro
     ├── launch                         # Launch nodes      
     │   ├── world.launch
+    ├── meshes                         # Mesh file for Hokuyo lidar sensor      
+    │   ├── hokuyo.dae
     ├── worlds                         # Gazebo main World containing models 
     │   ├── empty.world
     ├── CMakeLists.txt                 # Link libraries 
