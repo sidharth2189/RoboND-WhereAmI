@@ -20,7 +20,7 @@ Inside the Gazebo world one can identify:
     ├── meshes                         # Mesh file for Hokuyo lidar sensor      
     │   ├── hokuyo.dae
     ├── worlds                         # Gazebo main World containing models 
-    │   ├── empty.world
+    │   ├── office.world
     ├── CMakeLists.txt                 # Link libraries 
     └── package.xml                          
 
