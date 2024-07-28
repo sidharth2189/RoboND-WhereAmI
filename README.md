@@ -15,7 +15,8 @@ Inside the Gazebo world one can identify:
     │   ├── my_robot.xacro             # Robot description
     │   ├── my_robot.gazebo            # Plugin for sensor/actuator (Camera/Hokuyo lidar/Wheel joints)
     ├── launch                         # Launch nodes      
-    │   ├── world.launch
+    │   ├── world.launch               # Gazebo world along with robot
+    │   ├── robot_description.launch   # Generate urdf from xacro
     ├── meshes                         # Mesh file for Hokuyo lidar sensor      
     │   ├── hokuyo.dae
     ├── worlds                         # Gazebo main World containing models 
