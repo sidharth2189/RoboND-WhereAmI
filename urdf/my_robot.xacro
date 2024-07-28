@@ -8,6 +8,7 @@
     <child link="chassis" />
   </joint>
 
+  <!--chassis-->
   <link name='chassis'>
     <pose>0 0 0.1 0 0 0</pose>
 
@@ -66,6 +67,7 @@
 
   </link>
 
+  <!--left_wheel-->
   <link name='left_wheel'>
     <pose>0 0 0.1 0 0 0</pose>
 
@@ -95,6 +97,7 @@
   
   </link>
 
+  <!--right_wheel-->
   <link name='right_wheel'>
     <pose>0 0 0.1 0 0 0</pose>
 
@@ -124,6 +127,7 @@
   
   </link>
 
+  <!--Wheel Joints-->
   <joint name="left_wheel_hinge" type="continuous">
     <origin xyz="0 0.15 0" rpy="0 0 0" />
     <parent link="chassis"/>
@@ -141,5 +145,83 @@
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
+
+  <!--camera-->
+  <link name="camera">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      <box_inertia mass="0.1" x="0.05" y="0.05" z="0.05"/>
+    </inertial>
+  </link>
+
+  <!--camera_joint-->
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.2 0 0" rpy="0 0 0"/>
+    <parent link="chassis"/>
+    <child link="camera"/>
+  </joint>
+
+  <!--lidar-->
+  <link name="hokuyo">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry filename="package://my_robot/meshes/hokuyo.dae"/>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <!--lidar_joint-->
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
+    <parent link="chassis"/>
+    <child link="hokuyo"/>
+  </joint>
+
+  <!--add color-->
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <gazebo reference="chassis">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <gazebo reference="camera">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="hokuyo">
+    <material>Gazebo/Red</material>
+  </gazebo>
 
 </robot>
