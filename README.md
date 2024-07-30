@@ -95,9 +95,9 @@ roslaunch my_robot world.launch
 ```
 * Run ```drive_bot``` and ```process_image``` nodes in another terminal.
 ```
-$ cd ~/catkin_ws/
-$ source devel/setup.bash
-$ roslaunch ball_chaser ball_chaser.launch
+cd ~/catkin_ws/
+source devel/setup.bash
+roslaunch ball_chaser ball_chaser.launch
 ```
 
 ## Useful links
