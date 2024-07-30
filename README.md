@@ -64,13 +64,35 @@ $ mkdir -p ~/catkin_ws/src
 ```
 $ cd ~/catkin_ws/src
 ```
-* Initialize the catkin workspace.```$ catkin_init_workspace```
-* Clone this repository.```git clone https://github.com/sidharth2189/RoboND-GoChaseIt.git```
-* Copy ```my_robot``` and ```ball_chaser``` packages in the source folder for catkin workspace ```/catkin_ws/src```
-* Navigate to catkin workspace ```cd ~/catkin_ws/```. Build packages ```$ catkin_make```
-* Source the set up script of the workspace. ```$ source devel/setup.bash```
-* To check for missing package.```$ rosdep check <package name>```
-* Launch the robot inside the world.```$ roslaunch my_robot world.launch```
+* Initialize the catkin workspace.
+```
+catkin_init_workspace
+```
+* Clone this repository.
+```
+git clone https://github.com/sidharth2189/RoboND-GoChaseIt.git
+```
+* Copy ```my_robot``` and ```ball_chaser``` packages in the source folder for catkin workspace.```/catkin_ws/src```
+* Navigate to catkin workspace.
+```
+cd ~/catkin_ws/
+```
+* Build packages 
+```
+catkin_make
+```
+* Source the set up script of the workspace. 
+```
+source devel/setup.bash
+```
+* To check for missing package.
+```
+rosdep check <package name>
+```
+* Launch the robot inside the world.
+```
+roslaunch my_robot world.launch
+```
 * Run ```drive_bot``` and ```process_image``` nodes in another terminal.
 ```
 $ cd ~/catkin_ws/
