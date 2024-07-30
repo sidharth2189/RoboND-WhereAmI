@@ -7,6 +7,7 @@ Inside the Gazebo world one can identify:
 
 * Two wheeled Robot with caster.
 * Sensors (lidar and camera) mounted on the robot.
+* A white ball that is to be followed by the robot.
 
 ## Getting Started
 
