@@ -56,7 +56,7 @@ gazebo
 ```
 
 ### Run
-* Create a catkin workspace
+* Create a [catkin workspace](https://wiki.ros.org/catkin/conceptual_overview)
 ```
 $ mkdir -p ~/catkin_ws/src
 ```
