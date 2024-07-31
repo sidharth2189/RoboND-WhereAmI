@@ -108,11 +108,18 @@ cd ~/catkin_ws/
 source devel/setup.bash
 roslaunch ball_chaser ball_chaser.launch
 ```
+* To visualize the robot’s camera images, camera RGB image topic from RViz may be subscribed. 
+Or the ```rqt_image_view``` node can be run in a new terminal as below.
+```
+cd ~/catkin_ws/
+source devel/setup.bash
+rosrun rqt_image_view rqt_image_view
+```  
 
 ## Useful links
 
-* [Gazebo laser sensor](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Laser)
-* [Gazebo camera sensor](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Camera)
+* [Gazebo laser sensor for URDF](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Laser)
+* [Gazebo camera sensor for URDF](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Camera)
 * [Lidar plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/RayPlugin.cc)
 * [Camera plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
 * [Differential drive actuator plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/DiffDrivePlugin.cc)
