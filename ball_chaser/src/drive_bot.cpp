@@ -13,11 +13,7 @@ bool handle_drive_request(ball_chaser::DriveToTarget::Request& req,
     ball_chaser::DriveToTarget::Response& res)
 {
 
-    ROS_INFO("DriveToTargetRequest received - linear_x:%1.2f, angular_z:%1.2f", (float)req.linear_x, (float)req.angular_z);
-
-    // Avoid response message for same request
-    // float lin_x, ang_z;
-    // bool init = true;
+    // ROS_INFO("DriveToTargetRequest received - linear_x:%1.2f, angular_z:%1.2f", (float)req.linear_x, (float)req.angular_z);
 
     // TODO: Publish the requested velocities
     // Avoid an indefinite while loop for below set of instructions in order for function to return and accept new commands for movement
@@ -31,7 +27,7 @@ bool handle_drive_request(ball_chaser::DriveToTarget::Request& req,
     // Publish angles to drive the robot
     motor_command_publisher.publish(motor_command);
     // Return a response message        
-    res.msg_feedback = "Wheel joint is set to - linear_x: " + std::to_string(req.linear_x) + " , angular_z: " + std::to_string(req.angular_z);
+    res.msg_feedback = "Wheel joint velocities are set to - linear_x: " + std::to_string(req.linear_x) + " , angular_z: " + std::to_string(req.angular_z);
     ROS_INFO_STREAM(res.msg_feedback);
 
     return true;
