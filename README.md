@@ -2,6 +2,8 @@
 The purpose of this repository is to design and build a mobile robot, and house it in world. 
 Then, program a robot with C++ nodes in ROS to chase a white colored ball!
 
+The steps are listed as [summary of tasks](task_summary.txt).
+
 <img src="go_chase_it.gif"/>
 
 ## Description
