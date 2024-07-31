@@ -24,8 +24,8 @@ Inside the Gazebo world one can identify:
     │   ├── meshes                          # meshes folder for sensors
     │   │   ├── hokuyo.dae                  # Hokuyo lidar sensor
     │   ├── urdf                            # urdf folder for xarco files
-    │   │   ├── my_robot.gazebo             # Robot description
-    │   │   ├── my_robot.xacro              # Plugin for sensor/actuator (Camera/Hokuyo lidar/Differential drive)
+    │   │   ├── my_robot.gazebo             # Plugin for sensor/actuator (Camera/Hokuyo lidar/Differential drive)
+    │   │   ├── my_robot.xacro              # Robot description
     │   ├── world                           # world folder for world files
     │   │   ├── office.world
     │   ├── CMakeLists.txt                  # compiler instructions
