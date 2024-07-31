@@ -2,7 +2,7 @@
 The purpose of this repository is to design and build a mobile robot, and house it in world. 
 Then, program a robot with C++ nodes in ROS to chase a white colored ball!
 
-<img src="go_chase_it.mp4"/>
+<video controls src="go_chase_it.mp4" title="Title"></video>
 
 ## Description
 Inside the Gazebo world one can identify:
