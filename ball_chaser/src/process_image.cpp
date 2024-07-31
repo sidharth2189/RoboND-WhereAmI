@@ -9,6 +9,7 @@ ros::ServiceClient client;
 void drive_robot(float lin_x, float ang_z)
 {
     // TODO: Request a service and pass the velocities to it to drive the robot
+    ROS_INFO_STREAM("White ball found in the image!");
     ROS_INFO_STREAM("Requesting /ball_chaser/command_robot service to drive the robot");
 
     // Request centered wheel joint velocities
@@ -32,10 +33,13 @@ void process_image_callback(const sensor_msgs::Image img)
 
     // TODO: Loop through each pixel in the image and check if there's a bright white one
     // Then, identify if this pixel falls in the left, mid, or right side of the image
+    
+    // Keep the for-loop computationally less expensive by not streaming ROS INFO or calling drive_bot
+    // Reference: https://knowledge.udacity.com/questions/502203
     for (int i = 0; i < (img.height * img.step); i+=3) {
+        // Check if RGB channels have value of 255 each
         if (img.data[i] == white_pixel && img.data[i+1] == white_pixel && img.data[i+2] == white_pixel)  
         {
-            ROS_INFO_STREAM("White ball found in the image!");
             // Left (Left third of the img.step)
             if ((i%img.step) < (img.step/3)){left = true;}
             // Right (Right third of the img.step)
@@ -43,9 +47,6 @@ void process_image_callback(const sensor_msgs::Image img)
             // Straight (Center)
             else{center = true;}
             break;
-        }
-        else{
-            ROS_INFO_STREAM("White ball NOT found!");
         }
     }
 
