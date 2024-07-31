@@ -21,7 +21,7 @@ Inside the Gazebo world one can identify:
     │   │   ├── hokuyo.dae                  # Hokuyo lidar sensor
     │   ├── urdf                            # urdf folder for xarco files
     │   │   ├── my_robot.gazebo             # Robot description
-    │   │   ├── my_robot.xacro              # Plugin for sensor/actuator (Camera/Hokuyo lidar/Wheel joints)
+    │   │   ├── my_robot.xacro              # Plugin for sensor/actuator (Camera/Hokuyo lidar/Differential drive)
     │   ├── world                           # world folder for world files
     │   │   ├── office.world
     │   ├── CMakeLists.txt                  # compiler instructions
@@ -56,7 +56,11 @@ Inside the Gazebo world one can identify:
 gazebo
 ```
 
-### Run
+### How to Run
+* Update and upgrade the Workspace
+```
+sudo apt-get update && sudo apt-get upgrade -y
+```
 * Create a [catkin workspace](https://wiki.ros.org/catkin/conceptual_overview)
 ```
 $ mkdir -p ~/catkin_ws/src
@@ -65,7 +69,7 @@ $ mkdir -p ~/catkin_ws/src
 ```
 $ cd ~/catkin_ws/src
 ```
-* Initialize the catkin workspace.
+* Initialize the catkin workspace which will create a ```CMakeLists.txt``` file.
 ```
 catkin_init_workspace
 ```
@@ -73,12 +77,12 @@ catkin_init_workspace
 ```
 git clone https://github.com/sidharth2189/RoboND-GoChaseIt.git
 ```
-* Copy ```my_robot``` and ```ball_chaser``` packages in the source folder for catkin workspace.```/catkin_ws/src```
+* Copy ```my_robot``` and ```ball_chaser``` packages into the source folder for catkin workspace.```/catkin_ws/src```
 * Navigate to catkin workspace.
 ```
 cd ~/catkin_ws/
 ```
-* Build packages 
+* Build packages.Note that the command is issued from within the top level directory (i.e., within ```catkin_ws``` NOT ```catkin_ws/src```) 
 ```
 catkin_make
 ```
@@ -107,5 +111,5 @@ roslaunch ball_chaser ball_chaser.launch
 * [Gazebo camera sensor](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Camera)
 * [Lidar plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/RayPlugin.cc)
 * [Camera plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
-* [Wheel joint actuator plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
+* [Differential drive actuator plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/DiffDrivePlugin.cc)
 * [Mesh files for entire library of models in Gazebo](http://models.gazebosim.org/)
