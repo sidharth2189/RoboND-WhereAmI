@@ -51,9 +51,9 @@ void process_image_callback(const sensor_msgs::Image img)
 
     // Depending on the white ball position, call the drive_bot function and pass velocities to it
     // Request a stop when there's no white ball seen by the camera
-    if (left){drive_robot(0.0, 0.1);}
-    else if(right){drive_robot(0.0, -0.1);}
-    else if(center){drive_robot(0.1, 0.0);}
+    if (left){drive_robot(0.0, 0.5);}
+    else if(right){drive_robot(0.0, -0.5);}
+    else if(center){drive_robot(0.5, 0.0);}
     else{drive_robot(0.0, 0.0);}
 }
 
