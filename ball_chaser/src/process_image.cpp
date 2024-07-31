@@ -9,7 +9,6 @@ ros::ServiceClient client;
 void drive_robot(float lin_x, float ang_z)
 {
     // TODO: Request a service and pass the velocities to it to drive the robot
-    ROS_INFO_STREAM("White ball found in the image!");
     ROS_INFO_STREAM("Requesting /ball_chaser/command_robot service to drive the robot");
 
     // Request centered wheel joint velocities

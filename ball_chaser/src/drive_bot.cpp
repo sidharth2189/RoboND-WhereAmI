@@ -20,26 +20,19 @@ bool handle_drive_request(ball_chaser::DriveToTarget::Request& req,
     // bool init = true;
 
     // TODO: Publish the requested velocities
-    while (ros::ok()) {
-        // Create a motor_command object of type geometry_msgs::Twist
-        geometry_msgs::Twist motor_command;
-        // Set wheel velocities
-        motor_command.linear.x  = req.linear_x;
-        motor_command.angular.z = req.angular_z;
-        // Publish angles to drive the robot
-        motor_command_publisher.publish(motor_command);
-        // Return a response message        
-        res.msg_feedback = "Wheel joint is set to - linear_x: " + std::to_string(req.linear_x) + " , angular_z: " + std::to_string(req.angular_z);
-        ROS_INFO_STREAM(res.msg_feedback);
-        
-        // if (lin_x != motor_command.linear.x || ang_z != motor_command.angular.z || init == true){
-        //     res.msg_feedback = "Wheel joint is set to - linear_x: " + std::to_string(req.linear_x) + " , angular_z: " + std::to_string(req.angular_z);
-        //     ROS_INFO_STREAM(res.msg_feedback);
-        // }
-        // lin_x = motor_command.linear.x;
-        // ang_z = motor_command.angular.z;
-        // init = false;
-    }
+    // Avoid an indefinite while loop for below set of instructions in order for function to return and accept new commands for movement
+    // Reference: https://knowledge.udacity.com/questions/147553
+    
+    // Create a motor_command object of type geometry_msgs::Twist
+    geometry_msgs::Twist motor_command;
+    // Set wheel velocities
+    motor_command.linear.x  = req.linear_x;
+    motor_command.angular.z = req.angular_z;
+    // Publish angles to drive the robot
+    motor_command_publisher.publish(motor_command);
+    // Return a response message        
+    res.msg_feedback = "Wheel joint is set to - linear_x: " + std::to_string(req.linear_x) + " , angular_z: " + std::to_string(req.angular_z);
+    ROS_INFO_STREAM(res.msg_feedback);
 
     return true;
 }
