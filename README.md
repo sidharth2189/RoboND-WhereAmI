@@ -1,26 +1,25 @@
 # My Robot
-The purpose of this repository is to design and build a mobile robot, and house it in world. 
-Then, program a robot with C++ nodes in ROS to chase a white colored ball!
+The purpose of this repository is to estimate a robot's position relative to a known map of environment using [adaptive monte carlo localization](https://wiki.ros.org/amcl). 
 
 The steps are listed as [summary of tasks](task_summary.txt).
 
-<img src="go_chase_it.gif"/>
+<img src="amcl.gif"/>
 
 ## Description
 Inside the Gazebo world one can identify:
 
 * Two wheeled Robot with caster.
 * Sensors (lidar and camera) mounted on the robot.
-* A white ball that is to be followed by the robot.
 
 ## Getting Started
 
 ### Directory structure
-    .GoChaseIt                              # Go Chase It Project
+    .WhereAmI                               # Robot localization Project
     ├── my_robot                            # my_robot package                   
     │   ├── launch                          # launch folder for launch files   
     │   │   ├── robot_description.launch    # Generate urdf from xacro
     │   │   ├── world.launch                # launch Gazebo world along with robot
+    │   │   ├── amcl.launch                 # launch robot localization using amcl    
     │   ├── meshes                          # meshes folder for sensors
     │   │   ├── hokuyo.dae                  # Hokuyo lidar sensor
     │   ├── urdf                            # urdf folder for xarco files
@@ -30,16 +29,14 @@ Inside the Gazebo world one can identify:
     │   │   ├── office.world
     │   ├── CMakeLists.txt                  # compiler instructions
     │   ├── package.xml                     # package info
-    ├── ball_chaser                         # ball_chaser package                   
-    │   ├── launch                          # launch folder for launch files   
-    │   │   ├── ball_chaser.launch
-    │   ├── src                             # source folder for C++ scripts
-    │   │   ├── drive_bot.cpp               # Node to command wheel joint velocities to robot
-    │   │   ├── process_images.cpp          # Node to request drive_bot in the direction of ball
-    │   ├── srv                             # service folder for ROS services
-    │   │   ├── DriveToTarget.srv
-    │   ├── CMakeLists.txt                  # compiler instructions
-    │   ├── package.xml                     # package info                  
+    │   ├── config                          # parmater for robot's navigational goal   
+    │   │   ├── costmap_common_params.yaml  # rosparam for move_base package
+    │   │   ├── local_costmap_params.yaml   # rosparam for move_base package
+    │   │   ├── global_costmap_params.yaml  # rosparam for move_base package
+    │   │   ├── base_costmap_params.yaml    # rosparam for move_base package    
+    ├── pgm_map_creator                     # map creator package (submodule)
+    ├── teleop_twist_keyboard               # control robot motion through keyboard (submodule)  
+    ├── amcl.rviz                           # visualization file                                      
     └──                          
 
 ### Dependencies
@@ -77,11 +74,14 @@ $ cd ~/catkin_ws/src
 ```
 catkin_init_workspace
 ```
-* Clone this repository.
+* Clone this repository and its submodules.
 ```
-git clone https://github.com/sidharth2189/RoboND-GoChaseIt.git
+git clone https://github.com/sidharth2189/RoboND-WhereAmI.git
 ```
-* Copy ```my_robot``` and ```ball_chaser``` packages into the source folder for catkin workspace.```/catkin_ws/src```
+```
+git submodule update --init --recursive
+```
+* Copy ```my_robot```, ```pgm_map_creator``` and ```teleop_twist_keyboard``` packages into the source folder for catkin workspace.```/catkin_ws/src```
 * Navigate to catkin workspace.
 ```
 cd ~/catkin_ws/
@@ -98,29 +98,35 @@ source devel/setup.bash
 ```
 rosdep check <package name>
 ```
-* Launch the robot inside the world.
+* Launch the robot inside the world. Alongside Gazebo, this also open rviz for visualization.
 ```
 roslaunch my_robot world.launch
 ```
-* Run ```drive_bot``` and ```process_image``` nodes in another terminal.
+* Launch amcl in another terminal.
 ```
 cd ~/catkin_ws/
 source devel/setup.bash
-roslaunch ball_chaser ball_chaser.launch
+roslaunch my_robot amcl.launch
 ```
-* To visualize the robot’s camera images, camera RGB image topic from RViz may be subscribed. 
-Or the ```rqt_image_view``` node can be run in a new terminal as below.
-```
-cd ~/catkin_ws/
-source devel/setup.bash
-rosrun rqt_image_view rqt_image_view
-```  
+* To visualize the map and robot localization load ```amcl.rviz```.
+
+### Localization testing
+There are two options to test localization.
+* Send navigation goal via RViz.
+    * In rviz, click the ```2D Nav Goal``` button in the toolbar, then click and drag on the map send the goal to the robot. It will start moving and localize itself in the process. Refer [clip](/amcl.gif).
+    * The amcl node can also be given a nudge, by providing the robot an initial position estimate on the map using ```2D Pose Estimate```.
+        * Alternatively, set initial pose for robot in ```amcl.launch``` using below [steps](https://knowledge.udacity.com/questions/343189).
+            * Launch the amcl.launch, the map will appear in the RVIZ section.
+            * Keep the fixed frame as map and use ```2D pose Estimate``` button to set the robot location such that the laserscan matches the map.
+            * Once you finalize the location, you can see it on the terminal where you launched the amcl.launch file, the location will appear which you can use as the initial pose for amcl node. 
+
+* Send move command via ```teleop``` package.
+    * Control robot through keyboard as done in [EKF lab](https://github.com/sidharth2189/RoboND-EKFLab). The [teleop node](/teleop_twist_keyboard/teleop) needs to be added to package in this case. 
 
 ## Useful links
 
-* [Gazebo laser sensor for URDF](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Laser)
-* [Gazebo camera sensor for URDF](https://classic.gazebosim.org/tutorials?tut=ros_gzplugins#Camera)
-* [Lidar plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/RayPlugin.cc)
-* [Camera plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/CameraPlugin.cc)
-* [Differential drive actuator plugin](https://github.com/gazebosim/gazebo-classic/blob/gazebo11/plugins/DiffDrivePlugin.cc)
-* [Mesh files for entire library of models in Gazebo](http://models.gazebosim.org/)
+* [move_base](https://wiki.ros.org/move_base) can define a navigation goal position for your robot in the map, and the robot will navigate to that goal position. Note that this package is optional if [teleop node](https://github.com/ros-teleop/teleop_twist_keyboard) is used instead to send command for robot movement, using keyboard.
+* [config files](https://s3-us-west-1.amazonaws.com/udacity-robotics/Resource/where_am_i/config.zip) for parameters for move_base package.
+* [map_server](https://wiki.ros.org/map_server) node provides map data as a ROS service to other nodes such as the amcl node. Here, map_server node will locate the map you created in the Map Setup(opens in a new tab) step and send it out as the map data.
+* [amcl](https://wiki.ros.org/amcl) package is used in this project for localization.
+* [Robot reference](https://github.com/sidharth2189/RoboND-GoChaseIt)
