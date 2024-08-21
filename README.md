@@ -57,7 +57,89 @@ Inside the Gazebo world one can identify:
 gazebo
 ```
 
-### How to Run
+### How to generate map from gazebo world environment
+* This step helps generate a map for the robot to knows what to expect in environment.
+* For this purpose, [pgm_map_creator](/pgm_map_creator/) is used.
+* Navigate to ROS package folder and create a maps folder. That's where the map file will reside.
+```
+cd /home/workspace/catkin_ws/src/<YOUR PACKAGE NAME>
+```
+```
+mkdir maps
+```
+* Install Dependencies for compiling map creator.
+```
+sudo apt-get install libignition-math2-dev protobuf-compiler
+```
+* Clone repository or use the [submodule](/pgm_map_creator/) in this repository.
+```
+cd /home/workspace/catkin_ws/src/
+```
+```
+git clone https://github.com/hyfan1116/pgm_map_creator.git
+```
+* Build package
+```
+cd ..
+catkin_make
+```
+* Add and Edit the World File
+Copy the Gazebo world you created to the world folder in pgm_map_creator
+```
+cp <YOUR GAZEBO WORLD FILE> src/pgm_map_creator/world/<YOUR GAZEBO WORLD FILE>
+```
+* Insert the map creator plugin to world file. Open the world file using the editor of your choice. Add the following tag towards the end of the file, but just before </world> tag:
+```
+<plugin filename="libcollision_map_creator.so" name="collision_map_creator"/>
+```
+* Create the PGM map
+Open a terminal, run gzerver with the map file
+```
+gzserver src/pgm_map_creator/world/<YOUR GAZEBO WORLD FILE>
+```
+* Open another terminal, launch the request_publisher node
+```
+roslaunch pgm_map_creator request_publisher.launch
+```
+* Wait for the plugin to generate map. It will be located in the map folder of the pgm_map_creator! 
+* Open it to do a quick check of the map. If the map is cropped, you might want to adjust the parameters in launch/request_publisher.launch, namely the x and y values, which defines the size of the map
+```
+  <arg name="xmin" default="-15" />
+  <arg name="xmax" default="15" />
+  <arg name="ymin" default="-15" />
+  <arg name="ymax" default="15" />
+  <arg name="scan_height" default="5" />
+  <arg name="resolution" default="0.01" />
+```
+* Edit the Map
+If map is not accurate due to the models, feel free to edit the pgm file directly!
+
+* Add the Map to robot Package
+Now we have the map file, let us move it to where it is needed! That is the maps folder created at the very beginning of [robot package](/my_robot/)
+```
+cd /home/workspace/catkin_ws/
+cp src/pgm_map_creator/maps/<YOUR MAP NAME>  src/<YOUR PACKAGE NAME>/maps/<YOUR MAP NAME>
+```
+
+* A yaml file providing the [metadata about the map](https://wiki.ros.org/map_server#YAML_format). Create a yaml file next to map.
+```
+cd src/<YOUR PACKAGE NAME>/src/maps
+touch <YOUR MAP NAME>.yaml
+```
+
+* Add below lines to the yaml file.
+```
+image: <YOUR MAP NAME>
+resolution: 0.01
+origin: [-15.0, -15.0, 0.0]
+occupied_thresh: 0.65
+free_thresh: 0.196
+negate: 0
+```
+
+* Note that the origin of the map should correspond to map's size. For example, the default map size is 30 by 30, so the origin will be [-15, -15, 0], i.e. half the size of the map.
+
+### How to run localization
 * Update and upgrade the Workspace
 ```
 sudo apt-get update && sudo apt-get upgrade -y
@@ -110,7 +192,11 @@ roslaunch my_robot amcl.launch
 ```
 * To visualize the map and robot localization load ```amcl.rviz```.
 
-### Localization testing
+### How to tune parameters for localization
+* Reference for tuning [amcl parameters](/docs/amcl_parameters.txt) for better results.
+* Reference for [move_base parameters](/docs/move_base.txt).
+
+### How to test localization
 There are two options to test localization.
 * Send navigation goal via RViz.
     * In rviz, click the ```2D Nav Goal``` button in the toolbar, then click and drag on the map send the goal to the robot. It will start moving and localize itself in the process. Refer [clip](/amcl.gif).
@@ -124,7 +210,6 @@ There are two options to test localization.
     * Control robot through keyboard as done in [EKF lab](https://github.com/sidharth2189/RoboND-EKFLab). The [teleop node](/teleop_twist_keyboard/teleop) needs to be added to package in this case. 
 
 ## Useful links
-
 * [move_base](https://wiki.ros.org/move_base) can define a navigation goal position for your robot in the map, and the robot will navigate to that goal position. Note that this package is optional if [teleop node](https://github.com/ros-teleop/teleop_twist_keyboard) is used instead to send command for robot movement, using keyboard.
 * [config files](https://s3-us-west-1.amazonaws.com/udacity-robotics/Resource/where_am_i/config.zip) for parameters for move_base package.
 * [map_server](https://wiki.ros.org/map_server) node provides map data as a ROS service to other nodes such as the amcl node. Here, map_server node will locate the map you created in the Map Setup(opens in a new tab) step and send it out as the map data.
