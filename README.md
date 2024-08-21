@@ -187,7 +187,7 @@ cd ~/catkin_ws/
 source devel/setup.bash
 roslaunch my_robot amcl.launch
 ```
-* To visualize the map and robot localization load ```amcl.rviz```.
+* To visualize the map and robot localization load [amcl.rviz](/amcl.rviz) using rviz window.
 
 ### How to tune parameters for localization
 * Reference for tuning [amcl parameters](/docs/amcl_parameters.txt) for better results.
