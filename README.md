@@ -206,6 +206,16 @@ There are two options to test localization.
 * Send move command via ```teleop``` package.
     * Control robot through keyboard as done in [EKF lab](https://github.com/sidharth2189/RoboND-EKFLab). The [teleop node](/teleop_twist_keyboard/teleop) needs to be added to package in this case. 
 
+### Observation
+* While parameters are good to play with, it needs to be made sure that sensors placed on the robot are not obstructed by robot chassis itself.
+* This [image](/docs/laser_hit_chassis.png) is an example of such a case, where laser scans are obstructed by robot chassis.
+* As a result the scans [fluctuate](/docs/fluctuating_laser_scans.gif).
+* As a result localization is [improper](/docs/amcl_laser_obstructed_by_chassis.gif).
+* In this case, the corrective actions was to increase the x-pose of the Lidar joint in the [urdf file](/my_robot/urdf/my_robot.xacro) from 0.15 to 0.25.
+```
+<origin xyz="0.25 0 0.1" rpy="0 0 0"/>
+```
+
 ## Useful links
 * [move_base](https://wiki.ros.org/move_base) can define a navigation goal position for your robot in the map, and the robot will navigate to that goal position. Note that this package is optional if [teleop node](https://github.com/ros-teleop/teleop_twist_keyboard) is used instead to send command for robot movement, using keyboard.
 * [config files](https://s3-us-west-1.amazonaws.com/udacity-robotics/Resource/where_am_i/config.zip) for parameters for move_base package.
