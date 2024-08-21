@@ -3,7 +3,7 @@ The purpose of this repository is to estimate a robot's position relative to a k
 
 The steps are listed as [summary of tasks](task_summary.txt).
 
-<img src="amcl.gif"/>
+<img src="amcl_robot.gif"/>
 
 ## Description
 Inside the Gazebo world one can identify:
@@ -208,7 +208,7 @@ There are two options to test localization.
 
 ### Observation
 * While parameters are good to play with, it needs to be made sure that sensors placed on the robot are not obstructed by robot chassis itself.
-* This [image](/docs/laser_hit_chassis.png) is an example of such a case, where laser scans are obstructed by robot chassis.
+* This [image](/docs/laser_hit_chassis.png) represents such a case, where laser scans are obstructed by robot chassis.
 * As a result the scans [fluctuate](/docs/fluctuating_laser_scans.gif).
 * As a result localization is [improper](/docs/amcl_laser_obstructed_by_chassis.gif).
 * In this case, the corrective actions was to increase the x-pose of the Lidar joint in the [urdf file](/my_robot/urdf/my_robot.xacro) from 0.15 to 0.25.
