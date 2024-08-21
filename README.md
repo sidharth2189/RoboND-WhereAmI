@@ -41,17 +41,10 @@ Inside the Gazebo world one can identify:
 
 ### Dependencies
 
-* Operating System — Ubuntu Bionic 18.04 LTS or 20.04 LTS (Focal Fossa), and WSL on Windows
-* Software packages — CMake 2.8 or later, ROS Noetic, Gazebo 11
-    * [Gazebo Classic 11.0](https://classic.gazebosim.org/) will reach its end of life by Feb 2025.
-    * [ROS Noetic](https://wiki.ros.org/noetic) is supported for 20.04 and will reach its end of life in May 2025.
+* Operating System — Ubuntu 16.04 LTS. ([Udacity VM Image](https://s3-us-west-1.amazonaws.com/udacity-robotics/Virtual+Machines/Lubuntu_071917/RoboVM_V2.1.0.zip))
+    *  Please refer steps for usage of VM, resource allocation and first boot [here](/docs/VM.txt).
 
 ### Installing
-
-* [Install ROS Noetic using Ubuntu/WSL](https://wiki.ros.org/noetic/Installation/Ubuntu)
-* [Install Gazebo using Ubuntu packages](https://classic.gazebosim.org/tutorials?tut=install_ubuntu)
-* [Install ROS Noetic using Robostack for Mac](https://robostack.github.io/GettingStarted.html)
-* [Install Gazebo on Mac](https://classic.gazebosim.org/tutorials?tut=install_on_mac&cat=install)
 * To verify installation, run
 ```
 gazebo
