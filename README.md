@@ -33,7 +33,10 @@ Inside the Gazebo world one can identify:
     │   │   ├── costmap_common_params.yaml  # rosparam for move_base package
     │   │   ├── local_costmap_params.yaml   # rosparam for move_base package
     │   │   ├── global_costmap_params.yaml  # rosparam for move_base package
-    │   │   ├── base_costmap_params.yaml    # rosparam for move_base package    
+    │   │   ├── base_costmap_params.yaml    # rosparam for move_base package
+    │   ├── maps                            # parmater for robot's navigational goal   
+    │   │   ├── map.pgm                     # map generated from pgm_map_creator package
+    │   │   ├── map.yaml                    # map metadata    
     ├── pgm_map_creator                     # map creator package (submodule)
     ├── teleop_twist_keyboard               # control robot motion through keyboard (submodule)  
     ├── amcl.rviz                           # visualization file                                      
@@ -51,7 +54,8 @@ gazebo
 ```
 
 ### How to generate map from gazebo world environment
-* This step helps generate a map for the robot to knows what to expect in environment.
+* The ROS amcl node uses a [map file](/docs/pgm_map).
+* This step helps generate a [map](/my_robot/maps/map.pgm) for the robot to knows what to expect in environment.
 * For this purpose, [pgm_map_creator](/pgm_map_creator/) is used.
 * Navigate to ROS package folder and create a maps folder. That's where the map file will reside.
 ```
