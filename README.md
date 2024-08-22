@@ -1,4 +1,4 @@
-# My Robot
+# Where Am I
 The purpose of this repository is to estimate a robot's position relative to a known map of environment using [adaptive monte carlo localization](https://wiki.ros.org/amcl). 
 
 The steps are listed as [summary of tasks](task_summary.txt).
