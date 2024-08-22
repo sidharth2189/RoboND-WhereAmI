@@ -222,3 +222,5 @@ There are two options to test localization.
 * [map_server](https://wiki.ros.org/map_server) node provides map data as a ROS service to other nodes such as the amcl node. Here, map_server node will locate the map you created in the Map Setup(opens in a new tab) step and send it out as the map data.
 * [amcl](https://wiki.ros.org/amcl) package is used in this project for localization.
 * [Robot reference](https://github.com/sidharth2189/RoboND-GoChaseIt)
+* [Monte carlo localization](/docs/MCL_for_mobile_robots.pdf)
+* [Avoid robot chassis sinking in rviz](https://knowledge.udacity.com/questions/150890)
