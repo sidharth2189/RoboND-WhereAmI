@@ -56,7 +56,7 @@ gazebo
 ### How to generate map from gazebo world environment
 * The ROS amcl node uses a [map file](/docs/pgm_map).
 * This step helps generate a [map](/my_robot/maps/map.pgm) for the robot to knows what to expect in environment.
-* For this purpose, [pgm_map_creator](/pgm_map_creator/) is used.
+* For this purpose, [pgm_map_creator](https://github.com/hyfan1116/pgm_map_creator) is used.
 * Navigate to ROS package folder and create a maps folder. That's where the map file will reside.
 ```
 cd /home/workspace/catkin_ws/src/<YOUR PACKAGE NAME>
